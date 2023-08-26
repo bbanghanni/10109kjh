@@ -26,7 +26,6 @@ import random
 
 answer = random.randrange(0, 10)
 user_input = -1
-
  #사용자가 answer 맞출때까지 반복
  #1. 사용자에게 기회 주기
  #2. 틀렸을 떄 updown 출력해주기
@@ -35,5 +34,9 @@ while True:
     user_input = int(input("값을 입력하세요 >>"))
 
     if user_input == answer:
-    print("정답입니다!")
-    break
+        print("정답입니다!")
+        break
+    elif user_input > answer:
+        print("down")
+    elif user_input < answer:
+        print("up")
