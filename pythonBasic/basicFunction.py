@@ -20,9 +20,9 @@ hangman_input_history = []
 def getHangmanInput():
     while True:
         user_input = input("Input alphabet ::: ")
-        if(user_input.isalpha()):
+        if(user_input.isalpha()): #알파벳인지 확인
             alphabet = user_input[0].lower()
-            if(hangman_input_history.index(alphabet)):
+            if(hangman_input_history.index(alphabet)): #이미 입력된 값인지 확인
                 print("이미 입력한 값입니다. 새로운 알파벳을 입력해주세요.")
             else:
                 return alphabet
@@ -60,4 +60,5 @@ while userinput != 0:
         runUpDown()
 
 
-#전역변수:모든곳에서 쓰임/ 지역변수 : 쓰고 소멸됨
+#전역변수:모든곳에서 쓰임/ 지역변수 : 함수내부or구문내부에서 쓰임(for while if''')쓰고 소멸됨/매개변수 : 함수로 설정되는 변수
+
