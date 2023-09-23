@@ -44,5 +44,5 @@ while chance > 0:
             print("down")
 
         else:
-        print("up")
+            print("up")
 
