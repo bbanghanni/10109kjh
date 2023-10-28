@@ -34,8 +34,10 @@ def runHangMan():
     while chance > 0:
         alphabet = getHangmanInput()
         hangman_input_history.append(alphabet)
+        gongbak = printCorrectWords()
         if word.find(alphabet) != -1:
             print("존재합니다!")
+            print(''.join(gongbak))
         else:
             chance = chance - 1
             print("남은 기회 :", chance)
@@ -46,8 +48,11 @@ def printCorrectWords():
     alphabet = getHangmanInput()
     word = getRandomWord()
     gongbak = "_"*len(word)
-    gongbak.replace(word[word.find(alphabet)])
+    gongbak = list(gongbak)
+    for i in gongbak:
+        if i == word[]
 
+    # for문으로 맞는 글자 바꾸기
 def runUpDown():
     answer = random.randrange(0, 10)
     chance = 3
