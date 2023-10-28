@@ -4,7 +4,6 @@ def tmpFunction(x):
     return 3 * x + 5
 
 print(tmpFunction(5))
-
 def menuprint():
     print("=========GAME=========")
     print("1. 행맨")
@@ -42,6 +41,12 @@ def runHangMan():
             print("남은 기회 :", chance)
         #a.find(b)가 속해있지 않을 때 -1
         #alphabet이 word에 속해있으면 정답, 아니면 기회깎기
+
+def printCorrectWords():
+    alphabet = getHangmanInput()
+    word = getRandomWord()
+    gongbak = "_"*len(word)
+    gongbak.replace(word[word.find(alphabet)])
 
 def runUpDown():
     answer = random.randrange(0, 10)
