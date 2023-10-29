@@ -26,27 +26,41 @@ def getHangmanInput():
             else:
                 return alphabet
 
+def printCorrectWords(a,b,c):
+    dap = list(a)
+    for i in b:
+        if i == c:
+            dap[b.find(c)] = c
+            dap[b.rfind(c)] = c # 문제점 : 중복 알파벳 3개 이상 있을 때 답을 맞출 수 없음
+    dap = ''.join(dap)
+    return dap
+
+
 def runHangMan():
     global hangman_input_history
     hangman_input_history = []
     chance = 7
     word = getRandomWord()
+    correct = "_"*len(word)
     while chance > 0:
         alphabet = getHangmanInput()
         hangman_input_history.append(alphabet)
+        correct = printCorrectWords(correct, word, alphabet)
         if word.find(alphabet) != -1:
             print("존재합니다!")
+            print(correct)
+            if correct == word:
+                print("정답입니다!! 게임을 종료하겠습니다.")
+                break
+
         else:
             chance = chance - 1
             print("남은 기회 :", chance)
-        #a.find(b)가 속해있지 않을 때 -1
-        #alphabet이 word에 속해있으면 정답, 아니면 기회깎기
 
-def printCorrectWords():
-    alphabet = getHangmanInput()
-    word = getRandomWord()
-    gongbak = "_"*len(word)
-    gongbak.replace(word[word.find(alphabet)])
+
+
+
+
 
 def runUpDown():
     answer = random.randrange(0, 10)
