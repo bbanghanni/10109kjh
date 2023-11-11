@@ -26,6 +26,15 @@ def getHangmanInput():
             else:
                 return alphabet
 
+def printPresentWords(word):
+    printStr = ""
+    for i in word:
+        if i in hangman_input_history:
+            printStr = printStr + i
+        else:
+            printStr = printStr + "_"
+    print(printStr)
+
 def runHangMan():
     global hangman_input_history
     hangman_input_history = []
@@ -34,6 +43,7 @@ def runHangMan():
     word = getRandomWord()
     wordSet = set(word)
     while chance > 0:
+        printPresentWords(word)
         alphabet = str(getHangmanInput())
         hangman_input_history.append(alphabet)
         if word.find(alphabet) != -1:
@@ -41,10 +51,15 @@ def runHangMan():
             print("존재합니다!")
         else:
             chance = chance - 1
-            print("남은 기회 :", chance)
+            if chance == 0:
+                print("You die")
+            else:
+                print("남은 기회 :", chance)
         if correct >= len(wordSet):
             print("Alive!")
             break
+
+
         #a.find(b)가 속해있지 않을 때 -1
         #alphabet이 word에 속해있으면 정답, 아니면 기회깎기
 
