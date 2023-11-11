@@ -30,24 +30,27 @@ def runHangMan():
     global hangman_input_history
     hangman_input_history = []
     chance = 7
+    correct = 0
     word = getRandomWord()
+    wordSet = set(word)
     while chance > 0:
-        alphabet = getHangmanInput()
+        alphabet = str(getHangmanInput())
         hangman_input_history.append(alphabet)
         if word.find(alphabet) != -1:
+            correct = correct + 1
             print("존재합니다!")
         else:
             chance = chance - 1
             print("남은 기회 :", chance)
+        if correct >= len(wordSet):
+            print("Alive!")
+            break
         #a.find(b)가 속해있지 않을 때 -1
         #alphabet이 word에 속해있으면 정답, 아니면 기회깎기
 
-def printCorrectWords():
-    alphabet = getHangmanInput()
-    word = getRandomWord()
-    gongbak = "_"*len(word)
-    gongbak.replace(word[word.find(alphabet)])
 
+
+    # for문으로 맞는 글자 바꾸기
 def runUpDown():
     answer = random.randrange(0, 10)
     chance = 3
