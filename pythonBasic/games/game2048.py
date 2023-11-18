@@ -13,16 +13,16 @@ colors = {'white':(255, 255, 255)
           '256':(230, 74, 25),
           '512':(216, 67, 21),
           '1024':(191, 54, 12),
-          '2048':(213, 0, 0)}
+          '2048':(213, 0, 0)}#색상 설정 딕셔너리
 
 board = [[-1,-1,-1,-1],
          [-1,-1,-1,-1],
          [-1,-1,-1,-1],
          [-1,-1,-1,-1]]
 
-isGameRunning = True
 screensize = (500, 500)
 screen = pygame.display.set_mode(screensize)
+isGameRunning = True
 
 def initScreen():
     screen.fill(colors['white'])
@@ -34,8 +34,14 @@ def setEventListener():
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_q:
                 isGameRunning = False
-            else:
-                print("키보드 키 입력 이벤트가 감지됨")
+            elif event == pygame.K_DOWN:
+                print("아래")
+            elif event == pygame.K_UP:
+                print("위")
+            elif event == pygame.K_RIGHT:
+                print("오른쪽")
+            elif event == pygame.K_LEFT:
+                print("왼쪽")
 
 def drawDisplay():
     global screen
@@ -48,7 +54,11 @@ def drawDisplay():
         for j in range(4):
             x = (blockWidth + margin) * j + baseX
             y = (blockHeight + margin) * i + baseY
-            pygame.draw.rect(screen, colors['-1'], [x, y, blockWidth, blockHeight],2)
+            data = str(board[i][j])
+            if data == -1 :
+                pygame.draw.rect(screen, colors[data], [x, y, blockWidth, blockHeight],2)
+            else:
+                pygame.draw.rect(screen, colors[data], [x, y, blockWidth, blockHeight])
     pygame.display.flip()
 
 def run2048():
