@@ -1,17 +1,9 @@
-# f(x) = 3x + 5 ?
 from pythonBasic.games.updown import runUpDown
 from pythonBasic.games.hangman import runHangMan
 from pythonBasic.games.game2048 import run2048
 
 import random
 
-
-
-def tmpFunction(x):
-    return 3 * x + 5
-
-
-print(tmpFunction(5))
 def menuprint():
     print("=========GAME=========")
     print("1. 행맨")
