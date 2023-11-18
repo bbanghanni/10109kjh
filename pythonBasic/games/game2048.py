@@ -1,4 +1,5 @@
 import pygame
+import random
 
 colors = {'white':(255, 255, 255)
          ,'black': (0 ,0 ,0),
@@ -28,12 +29,26 @@ def initScreen():
     screen.fill(colors['white'])
     pygame.display.update()
 
+def addNewBlock():
+    canSet = False
+    while not canSet:
+        randomX = random.randint(0, 3)
+        randomY = random.randint(0, 3)
+        if board[randomX][randomY] == -1:
+            canSet = True
+
+    board[randomX][randomY] = 2 if random.randint(1,10) < 10 else 4 # 1/10확률로 4,이외에는 2가 추가
+
 def setEventListener():
     global isGameRunning
     for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            isGameRunning = False
+            return
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_q:
                 isGameRunning = False
+                return
             elif event == pygame.K_DOWN:
                 print("아래")
             elif event == pygame.K_UP:
@@ -42,6 +57,7 @@ def setEventListener():
                 print("오른쪽")
             elif event == pygame.K_LEFT:
                 print("왼쪽")
+            addNewBlock()
 
 def drawDisplay():
     global screen
