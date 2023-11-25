@@ -29,6 +29,12 @@ def initScreen():
     screen.fill(colors['white'])
     pygame.display.update()
 
+def startBlock():
+        for i in range(0,2):
+            X = random.randint(0, 3)
+            Y = random.randint(0, 3)
+            board[X][Y] = 2
+
 def addNewBlock():
     canSet = False
     while not canSet:
@@ -50,14 +56,65 @@ def setEventListener():
                 isGameRunning = False
                 return
             elif event == pygame.K_DOWN:
-                print("아래")
+                kdown()
             elif event == pygame.K_UP:
-                print("위")
+                kup()
             elif event == pygame.K_RIGHT:
-                print("오른쪽")
+                kright()
             elif event == pygame.K_LEFT:
-                print("왼쪽")
+                kleft()
             addNewBlock()
+
+def kdown():
+    for x in range(2,1,-1):
+        for y in range(0,4):
+            if board[x][y] != -1:
+                for z in range(x+1,4):
+                    if board[x][z] != board[x][y] and board[x][z] != -1:
+                        break
+                    elif board[x][z] == board[x][y]:
+                        board[x][z] *= 2
+                        board[x][y] = -1
+                        break
+                board[3][y] = board[x][y]
+def kup():
+    for x in range(1,4):
+        for y in range(0,4):
+            if board[x][y] != -1:
+                for z in range(x-1,1):
+                    if board[z][y] != board[x][y] and board[z][y] != -1:
+                        break
+                    elif board[z][y] == board[x][y]:
+                        board[z][y] *= 2
+                        board[x][y] = -1
+                        break
+                board[0][y] = board[x][y]
+def kright():
+    for x in range(3,-1,-1):
+        for y in range(0,4):
+            if board[x][y] != -1:
+                for z in range(x+1,4):
+                    if board[z][y] != board[x][y] and board[z][y] != -1:
+                        break
+                    elif board[z][y] == board[x][y]:
+                        board[z][y] *= 2
+                        board[x][y] = -1
+                        break
+                board[3][y] = board[x][y]
+def kleft():
+    for x in range(3,-1,-1):
+        for y in range(0,4):
+            if board[x][y] != -1:
+                for z in range(x+1,4):
+                    if board[z][y] != board[x][y] and board[z][y] != -1:
+                        break
+                    elif board[z][y] == board[x][y]:
+                        board[z][y] *= 2
+                        board[x][y] = -1
+                        break
+                board[3][y] = board[x][y]
+
+
 
 def drawDisplay():
     global screen
@@ -81,6 +138,7 @@ def run2048():
     pygame.init()
     initScreen()
     print("2048 게임 시작")
+    startBlock()
     while isGameRunning:
         setEventListener()
         drawDisplay()
@@ -88,3 +146,10 @@ def run2048():
     pygame.quit()
 
 run2048()
+
+
+
+# 0. pygame library 검색 -> 숫자를 화면에 보이게
+# 1. 방향키 눌렀을때, 블럭 이동
+# 2. 블럭 이동했을때 같은 방향에 같은 숫자가 있는경우, 블럭 합치기
+# 3. 2048이 등장하면 게임종료
